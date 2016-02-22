@@ -26,7 +26,7 @@ class DetailsViewController: UIViewController {
         super.viewDidLoad()
        
                 tweetText.text = tweet.text
-                time.text = String(tweet.createdAt)
+                time.text = String(tweet.createdAt!)
                 name.text = tweet.user?.name
                 posterImage.setImageWithURL(NSURL(string:(tweet.user?.profileImageURL)!)!)
                 retweetCount.text = String(tweet.tweetCount!)
