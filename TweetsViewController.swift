@@ -13,6 +13,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     var selectedTweet : Tweet?
     
     @IBOutlet var tableView: UITableView!
+    var isMoreDataLoading = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +32,30 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             self.tableView.reloadData()
         }
  
+    }
+    func loadMoreData() {
+        TwitterClient.sharedInstance.homeTimelineWithParams(nil) { (tweets, error) -> () in
+            self.tweets = tweets
+            self.isMoreDataLoading = false
+            self.tableView.reloadData()
+        }
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if (!isMoreDataLoading) {
+            // Calculate the position of one screen length before the bottom of the results
+            let scrollViewContentHeight = tableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.dragging) {
+                
+                isMoreDataLoading = true
+                
+                // Code to load more results
+                loadMoreData()
+            }
+        }
     }
     
 //    override func viewWillAppear(animated: Bool) {

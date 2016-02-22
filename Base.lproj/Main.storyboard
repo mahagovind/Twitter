@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Twitter View Controller-->
@@ -192,16 +193,20 @@
                                 <action selector="onCancel:" destination="t5E-ma-Scs" id="H02-L7-Do7"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Tweet" id="1vI-L4-jjl">
-                            <connections>
-                                <action selector="onTweet:" destination="t5E-ma-Scs" id="To2-o5-lPF"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Tweet" id="1vI-L4-jjl">
+                                <connections>
+                                    <action selector="onTweet:" destination="t5E-ma-Scs" id="To2-o5-lPF"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="140" id="eK3-Uo-WkX"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="message" destination="W8Y-eH-Dda" id="Sre-WD-mGH"/>
                         <outlet property="name" destination="TDE-QT-P2S" id="EPh-4b-1sP"/>
                         <outlet property="posterImage" destination="gDF-Qy-rFz" id="ggS-eQ-z9k"/>
+                        <outlet property="tweetCounter" destination="eK3-Uo-WkX" id="Wz2-pm-KVb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h05-UF-6Nj" userLabel="First Responder" sceneMemberID="firstResponder"/>

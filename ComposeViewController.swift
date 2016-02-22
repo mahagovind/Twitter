@@ -8,16 +8,19 @@
 
 import UIKit
 
-class ComposeViewController: UIViewController {
+class ComposeViewController: UIViewController, UITextFieldDelegate {
     var user : User?
     @IBOutlet var name: UILabel!
     @IBOutlet var posterImage: UIImageView!
     @IBOutlet var message: UITextField!
+    @IBOutlet var tweetCounter: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
+        message.becomeFirstResponder()
         user = User.currentUser
         posterImage.setImageWithURL(NSURL(string: (user?.profileImageURL)!)!)
         name.text = user?.name
+        message.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -26,8 +29,25 @@ class ComposeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if string == " " {
+            if message.text != "" {
+                var text = Int(tweetCounter.title!)
+                text = text!-1
+                tweetCounter.title = String(text!)
+                
+            }
+            print("SpaceBar is pressed")
+        }
+        return true
+    }
+    
+   
     @IBAction func onTweet(sender: AnyObject) {
 //        var param1 = NSDictionary()
+        var text1 = Int(tweetCounter.title!)
+        text1 = text1!-1
+        tweetCounter.title = String(text1!)
         let text = message.text
       //  param1.setValue(text, forKey: "status")
         TwitterClient.sharedInstance.posthomeTweet(text!) { (tweets, error) -> () in
