@@ -14,30 +14,70 @@ class DetailsViewController: UIViewController {
     @IBOutlet var name: UILabel!
     @IBOutlet var posterImage: UIImageView!
     
+    @IBOutlet var favImage: UIImageView!
+    @IBOutlet var retweetImage: UIImageView!
     @IBOutlet var favCount: UILabel!
     @IBOutlet var retweetCount: UILabel!
     @IBOutlet var tweetText: UILabel!
+    var ret = 0
+    var fav = 0
      var tweet :Tweet!
       override func viewDidLoad() {
         super.viewDidLoad()
        
                 tweetText.text = tweet.text
-                let date = NSCalendar.currentCalendar().component(.Day, fromDate: tweet.createdAt!)
-                let month = NSCalendar.currentCalendar().component(.Month, fromDate: tweet.createdAt!)
-                let dateFormatter: NSDateFormatter = NSDateFormatter()
-                
-                let months = dateFormatter.shortMonthSymbols
-                let monthSymbol = months[month-1] as! String
-                
-                time.text = monthSymbol + " \(date)"
+                time.text = String(tweet.createdAt)
                 name.text = tweet.user?.name
                 posterImage.setImageWithURL(NSURL(string:(tweet.user?.profileImageURL)!)!)
                 retweetCount.text = String(tweet.tweetCount!)
                 favCount.text = String(tweet.favCount!)
+        var tap = UITapGestureRecognizer(target: self, action: Selector("tappedMe"))
+        retweetImage.addGestureRecognizer(tap)
+        retweetImage.userInteractionEnabled = true
+        
+        var tap2 = UITapGestureRecognizer(target: self, action: Selector("tappedMe2"))
+        favImage.addGestureRecognizer(tap2)
+        favImage.userInteractionEnabled = true
+
           
 
 
         // Do any additional setup after loading the view.
+    }
+    func tappedMe()
+    {
+        var text = Int(retweetCount.text!)
+        if ret % 2 == 0 {
+        text = text! + 1
+            retweetImage.image = retweetImage.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+            retweetImage.tintColor = UIColor.redColor()
+        } else {
+            retweetImage.image = retweetImage.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+            retweetImage.tintColor = UIColor.lightGrayColor()
+            text = text! - 1
+ 
+        }
+        ret = ret + 1
+        retweetCount.text = String(text!)
+    }
+    
+    func tappedMe2()
+    {
+        var text = Int(favCount.text!)
+
+        if fav % 2 == 0 {
+        text = text! + 1
+            favImage.image = favImage.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+            favImage.tintColor = UIColor.redColor()
+        } else {
+            favImage.image = favImage.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+            favImage.tintColor = UIColor.lightGrayColor()
+
+            text = text! - 1
+
+        }
+        fav++
+        favCount.text = String(text!)
     }
 
     override func didReceiveMemoryWarning() {

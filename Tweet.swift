@@ -15,6 +15,7 @@ class Tweet: NSObject {
     var createdAt : NSDate?
     var tweetCount: Int?
     var favCount: Int?
+    var id : Int?
 
     init(dict :NSDictionary) {
         user = User(dict: (dict["user"] as? NSDictionary)!)
@@ -22,6 +23,7 @@ class Tweet: NSObject {
         createdAtString = dict["created_at"] as? String
         tweetCount = dict["retweet_count"] as? Int
         favCount = dict["favorite_count"] as? Int
+        id = dict["id"] as? Int
         let formatter = NSDateFormatter()
         formatter.locale = NSLocale(localeIdentifier: "US_en")
         formatter.timeZone = NSTimeZone(name: "GMT")

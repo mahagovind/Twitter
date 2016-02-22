@@ -337,9 +337,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="favCount" destination="YNW-7d-d40" id="v7H-0y-oer"/>
+                        <outlet property="favImage" destination="8gx-Xk-5E0" id="rLr-b0-kgk"/>
                         <outlet property="name" destination="OHV-sh-0hb" id="Si2-vh-QUF"/>
                         <outlet property="posterImage" destination="E8N-Jr-cHZ" id="YUa-RR-tsp"/>
                         <outlet property="retweetCount" destination="UNH-uN-R8m" id="fI2-O3-YF6"/>
+                        <outlet property="retweetImage" destination="B8m-TG-Bim" id="fZM-I0-FlR"/>
                         <outlet property="time" destination="vKo-O2-QEs" id="wMC-qF-z2y"/>
                         <outlet property="tweetText" destination="qbA-lx-ISD" id="pXn-rG-e79"/>
                     </connections>
