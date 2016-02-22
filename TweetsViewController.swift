@@ -32,14 +32,14 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
  
     }
     
-    override func viewWillAppear(animated: Bool) {
-        TwitterClient.sharedInstance.homeTimelineWithParams(nil) { (tweets, error) -> () in
-            self.tweets = tweets
-            self.tableView.reloadData()
-        }
-
-        
-    }
+//    override func viewWillAppear(animated: Bool) {
+//        TwitterClient.sharedInstance.homeTimelineWithParams(nil) { (tweets, error) -> () in
+//            self.tweets = tweets
+//            self.tableView.reloadData()
+//        }
+//
+//        
+//    }
     
     func refreshControlAction(refreshControl: UIRefreshControl) {
         TwitterClient.sharedInstance.homeTimelineWithParams(nil) { (tweets, error) -> () in
